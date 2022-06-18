@@ -55,7 +55,10 @@ Resources:
           sudo apt-get update -y
           sudo apt-get install apache2 -y
           sudo service apache2 start
+          cd /var/www/html
+          echo "it works! Udagram, Udacity" > index.html
       ImageId: ami-00ddb0e5626798373
+      KeyName: jumpbox
       SecurityGroups:
       - Ref: WebServerSecurityGroup
       InstanceType: t3.medium
@@ -108,33 +111,33 @@ Resources:
         -
           !Ref UdagramEc2InstanceRole
 
-  S3Bucket:
-    Type: AWS::S3::Bucket
-    DeletionPolicy: Retain
-    Properties:
-      BucketName: udagram-bucket-prime
+  # create Bucket
+  # S3Bucket:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: udagram-bucket-prime
 
-  S3BucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties: 
-      Bucket: !Ref S3Bucket
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Action:
-              - 's3:GetObject'
-            Effect: Allow
-            Resource: !Join
-              - ''
-              - - 'arn:aws:s3:::'
-                - !Ref S3Bucket
-                - /*
-            Principal: '*'
-            Condition:
-              StringLike:
-                'aws:Referer':
-                  - 'http://www.example.com/*'
-                  - 'http://example.net/*'
+  # S3BucketPolicy:
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties: 
+  #     Bucket: !Ref S3Bucket
+  #     PolicyDocument:
+  #       Version: 2012-10-17
+  #       Statement:
+  #         - Action:
+  #             - 's3:GetObject'
+  #           Effect: Allow
+  #           Resource: !Join
+  #             - ''
+  #             - - 'arn:aws:s3:::'
+  #               - !Ref S3Bucket
+  #               - /*
+  #           Principal: '*'
+  #           Condition:
+  #             StringLike:
+  #               'aws:Referer':
+  #                 - 'http://www.example.com/*'
+  #                 - 'http://example.net/*'
 
 # End
 
