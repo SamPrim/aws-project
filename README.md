@@ -4,7 +4,7 @@
 
 Load Balancer Link : 
 `
- udagr-WebAp-2YJJ3EP9J956-292072935.us-east-1.elb.amazonaws.com
+ udagr-WebAp-1E089FNFCZLH4-822502893.us-east-1.elb.amazonaws.com
 `
 
 By NDO Samy stephan
